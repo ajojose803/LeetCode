@@ -4,16 +4,23 @@
  * @return {boolean}
  */
 var isAnagram = function (s, t) {
-    if(s.length !== t.length) return false;
-    const word1 = s.split('').sort().join('');
-    const word2 = t.split('').sort().join('');
-    return word1 === word2;
-    
+    if (s.length !== t.length) {
+        return false;
+    }
 
-    // for (let i = 0; i < s.length; i++) {
-    //     if(string1[i] !== string2[i]) {
-    //         return false;
-    //     };
-    // }
-    // return true;
+    const countS = {};
+    const countT = {};
+
+    for (let i = 0; i < s.length; i++) {
+        countS[s[i]] = (countS[s[i]] || 0) + 1;
+        countT[t[i]] = (countT[t[i]] || 0) + 1;
+    }
+
+    for(const key in countS){
+        if(countS[key] !== countT[key]){
+            return false;
+        }
+    }
+    return true;
+
 };
